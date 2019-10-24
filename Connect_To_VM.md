@@ -15,8 +15,11 @@ It will open the sshd_config file with vim (a text editor used in UNIX a lot). M
 ![enter image description here](https://lh3.googleusercontent.com/VCiilf7MiAMZl8-UabgIcd04xTIyQALOSy7D04yVv2E2Vyk4oPazoB7mXOUlm9J6Ltn400VeSizj "sshd_config")
 
 >**Quick tutor with vim:**
+
 >Press 'i' to enter the INSERT mode and now you can modify the file.
+
 >Press 'esc' to quit INSERT mode and now you are in the nomal mode.
+
 >Type ':x' or ':wq' to save your change and quit.
 
 **Second**, set a password for the root user on your VM with the following code:
@@ -41,8 +44,10 @@ sudo /etc/init.d/ssh restart
 ssh root@[external ip address]
 ```
 
->Notice: 
+>**Notice:** 
+
 >The 'root' should be your VM's user name. If you haven't modified that, it should be 'root' defaultly.
+
 >You can find your VM's external ip address on GoogleCloud Platform.
 
 If you run the command for the first time, it will warn you 'The authenticity of host 'xxx (xxx)' can't be established.' and ask you 'Are you sure you want to continue connecting (yes/no)?'. Type yes and return. It will add the VM to the list of known hosts on your local machine.
