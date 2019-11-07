@@ -57,3 +57,56 @@ Also, this command will pop up a request for your password. Enter the password y
 You can notice that now your terminal is run in the VM environment!
 
 If you want to exit the remote VM environment, use Ctrl+D or 'exit' command.
+
+
+# Method 2: SSH Keys
+
+Using the password login method, you have to enter your password every time, which can be a little annoying. Well, SSH key is here to help!
+
+The general idea is to create public and private key pair on your local machine. And, upload the public key to your vm (remote server). Here are the detailed steps and commands you gonna use:
+
+First, generate the key pair on your local machine:
+
+```
+ssh-keygen
+```
+
+Running this command will bring up several questions, such as the file in which to save the key and a passphrase. You can either hit Enter all the way to skip them or set them as you would like. After that, you have the key pair on your local machine now! It usually rests in ~/.ssh directory. (You can know the directory during your creating process)
+
+Next step is to upload the public key to your vm. The public key file is the .pub file in the ~/.ssh directory. Use this command to upload:
+
+```
+ssh-copy-id -i ~/.ssh/mykey.pub user@host
+```
+
+Replace the 'mykey.pub' with your public key file's name. And, the user and root refers to your virtual machine.
+
+This may bring up some authentification process to connect to your vm successfully. For example, if you set password login to your vm before, it may ask you to enter the password. However, after this, you will no longer need to enter password any more!
+
+Now, you are all set. Connect your local machine to the vm by
+
+```
+ssh user@host
+```
+
+# Troubleshooting
+
+When you connect to the vm by ssh user@host and get the following error:
+
+![](images/error1.png)
+
+and it says something like this:
+
+```
+Offending ECDSA key in ~/.ssh/known_hosts:12
+```
+
+It may due to any possible changes you did to your ssh key or changes on the host. Hopefully, you can solve this problem by:
+
+```
+ssh-keygen -R "you server hostname or ip"
+```
+
+or delete the 12th host from the known_hosts file as the message pointed out.
+
+Now, it works again!
